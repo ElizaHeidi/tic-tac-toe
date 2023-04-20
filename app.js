@@ -58,6 +58,9 @@ const newGame = (() => {
     cells.forEach((cell) => {
       cell.addEventListener("click", () => {
         cell.textContent = currentPlayer.side;
+        if (cell.textContent != "") {
+          return;
+        }
       });
     });
 
