@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+    <title>Tic-Tac-Toe 🧑‍💻</title>
+  </head>
+  <body>
+    <div>
+      <h1>Tic-Tac-Toe 🧑‍💻</h1>
+      <div class="gameboard">
+        <div class="cell cell-1"></div>
+        <div class="cell cell-2"></div>
+        <div class="cell cell-3"></div>
+        <div class="cell cell-4"></div>
+        <div class="cell cell-5"></div>
+        <div class="cell cell-6"></div>
+        <div class="cell cell-7"></div>
+        <div class="cell cell-8"></div>
+        <div class="cell cell-9"></div>
+      </div>
+    </div>
+    <div class="btn-wrapper"><button class="startGame">Start Game</button></div>
+    <section class="modal hidden">
+      <div class="flex">
+        <button class="btn-close">⨉</button>
+      </div>
+      <div>
+        <h3>Share your name and pick a side!</h3>
+      </div>
+
+      <form action="#">
+        <p>
+          <input type="text" id="name" name="name" placeholder="First name" />
+          <label for="name"></label>
+        </p>
+        <p>
+          <input type="radio" id="x-side" name="side" value="X" />
+          <label for="radio">X</label>
+          <input type="radio" id="o-side" name="side" />
+          <label for="radio">O</label>
+        </p>
+      </form>
+      <button class="btn-submit" type="submit">Submit</button>
+    </section>
+
+    <div class="overlay hidden"></div>
+  </body>
+</html>
