@@ -1,4 +1,4 @@
-let isEmpty = false;
+let hasPlayed = false;
 
 const Gameboard = (() => {
   let board = ["", "", "", "", "", "", "", "", ""];
@@ -12,14 +12,34 @@ const Gameboard = (() => {
 
     let score = 0;
   };
+  const getMark = (index) => {
+    return board[index];
+  };
 
-  return { boardReset };
+  const setMark = (index, mark) => {
+    board[index] = mark;
+  };
+
+  return { board, boardReset, getMark, setMark };
 })();
-
-const makeGameboard = (() => {})();
 
 const Player = (name, side) => {
   return { name, side };
+};
+
+const currentPlayer = {
+  player: null,
+  next() {
+    this.player = this.player === playerOne ? playerTwo : playerOne;
+  },
+};
+
+let playerOne, playerTwo;
+
+const switchPlayers = () => {
+  if (hasPlayed) {
+    currentPlayer.next();
+  }
 };
 
 const newGame = (() => {
@@ -53,18 +73,63 @@ const newGame = (() => {
     let playerName = input.value;
     let playerSide = xSide.checked ? xSide.value : oSide.value;
 
-    currentPlayer = Player(playerName, playerSide);
+    playerOne = Player(playerName, playerSide);
+    playerTwo = Player(playerName, playerSide === "X" ? "O" : "X");
 
-    cells.forEach((cell) => {
-      cell.addEventListener("click", () => {
-        cell.textContent = currentPlayer.side;
-        if (cell.textContent != "") {
-          return;
-        }
-      });
-    });
+    // TODO: Display currentPlayer.name and currentPlayer.side above 'New Game'
+
+    currentPlayer.player = playerOne;
 
     closeModal();
     Gameboard.boardReset();
+
+    cells.forEach((cell) => {
+      cell.addEventListener("click", () => {
+        if (cell.textContent != "") {
+          return;
+        }
+        const cellIndex = parseInt(cell.dataset.index);
+        cell.textContent = currentPlayer.player.side;
+        Gameboard.setMark(cellIndex, currentPlayer.player.side);
+        hasPlayed = true;
+
+        const playedPlayer = currentPlayer.player;
+        const winner = checkWinner(playedPlayer);
+        if (winner) {
+          console.log(`${winner.name} (${winner.side}) is the winner!`);
+        } else {
+          switchPlayers();
+        }
+      });
+    });
   });
+  return {};
 })();
+
+const checkWinner = (playedPlayer) => {
+  const winningAxes = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+  const mark = playedPlayer.side;
+
+  winningAxes.forEach((item, index) => {
+    // [0, 1, 2, 3, 4, 5, 6, 7]
+
+    if (
+      Gameboard.board[item[0]] === playedPlayer.side &&
+      Gameboard.board[item[1]] === playedPlayer.side &&
+      Gameboard.board[item[2]] === playedPlayer.side
+    ) {
+      console.log("winner!");
+    }
+    return null;
+  });
+};
