@@ -12,15 +12,21 @@ const Gameboard = (() => {
 
     let score = 0;
   };
+
+  const getBoard = () => {
+    return board;
+  };
+
   const getMark = (index) => {
     return board[index];
   };
 
-  const setMark = (index, mark) => {
-    board[index] = mark;
+  const setMark = (index, side) => {
+    if (index > board.length) return;
+    board[index] = side;
   };
 
-  return { board, boardReset, getMark, setMark };
+  return { board, boardReset, getBoard, getMark, setMark };
 })();
 
 const Player = (name, side) => {
@@ -82,25 +88,27 @@ const newGame = (() => {
 
     closeModal();
     Gameboard.boardReset();
+  });
 
-    cells.forEach((cell) => {
-      cell.addEventListener("click", () => {
-        if (cell.textContent != "") {
-          return;
-        }
-        const cellIndex = parseInt(cell.dataset.index);
-        cell.textContent = currentPlayer.player.side;
-        Gameboard.setMark(cellIndex, currentPlayer.player.side);
-        hasPlayed = true;
+  cells.forEach((cell) => {
+    cell.addEventListener("click", (e) => {
+      if (cell.textContent != "") {
+        return;
+      }
+      const cellIndex = parseInt(e.target.dataset.index);
+      console.log(cellIndex);
+      Gameboard.setMark(cellIndex, currentPlayer.player.side);
+      console.log(Gameboard.getBoard());
+      cell.textContent = currentPlayer.player.side;
+      hasPlayed = true;
 
-        const playedPlayer = currentPlayer.player;
-        const winner = checkWinner(playedPlayer);
-        if (winner) {
-          console.log(`${winner.name} (${winner.side}) is the winner!`);
-        } else {
-          switchPlayers();
-        }
-      });
+      const playedPlayer = currentPlayer.player;
+      const winner = checkWinner(playedPlayer);
+      if (winner) {
+        console.log(`${winner.name} (${winner.side}) is the winner!`);
+      } else {
+        switchPlayers();
+      }
     });
   });
   return {};
@@ -120,16 +128,17 @@ const checkWinner = (playedPlayer) => {
 
   const mark = playedPlayer.side;
 
-  winningAxes.forEach((item, index) => {
-    // [0, 1, 2, 3, 4, 5, 6, 7]
-
+  for (let i = 0; i < winningAxes.length; i++) {
+    const [a, b, c] = winningAxes[i];
     if (
-      Gameboard.board[item[0]] === playedPlayer.side &&
-      Gameboard.board[item[1]] === playedPlayer.side &&
-      Gameboard.board[item[2]] === playedPlayer.side
+      Gameboard.getBoard()[a] === mark &&
+      Gameboard.getBoard()[b] === mark &&
+      Gameboard.getBoard()[c] === mark
     ) {
       console.log("winner!");
+      return playedPlayer;
     }
-    return null;
-  });
+  }
+
+  return null;
 };
