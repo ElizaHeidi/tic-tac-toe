@@ -6,6 +6,7 @@
 
 h1 {
   text-align: center;
+  font-family: "rancho";
   padding: 64px;
 }
 
@@ -24,8 +25,9 @@ div:not(.gameboard) {
 }
 
 .gameboard {
-  height: 500px;
-  width: 500px;
+  height: 400px;
+  width: 400px;
+  margin-bottom: 32px;
   border: 1px solid;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -35,9 +37,63 @@ div:not(.gameboard) {
   height: 1fr;
   width: 1fr;
   border: 1px solid;
+  font-family: "rancho";
 }
 
-.btn-wrapper {
+.cell:hover {
+  background-color: aquamarine;
+}
+
+.winner {
+  font-family: "roboto";
+  font-weight: 700;
+  background-color: aquamarine;
+  color: maroon;
+}
+
+.text-name {
+  margin: 4px;
+  font-family: "roboto";
+}
+
+.text-side {
+  margin: 4px;
+  margin-bottom: 12px;
+  font-family: "roboto";
+}
+
+.start-game {
+  margin: 4px;
+  margin-top: 6.5px;
+  margin-left: 2px;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  color: #000;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #000;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  letter-spacing: -0.8px;
+  line-height: 24px;
+  min-width: 100px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.start-game:hover {
+  background-color: #000;
+  color: #fff;
 }
 
 /* Modal and Overlay */
@@ -60,13 +116,19 @@ div:not(.gameboard) {
   z-index: 2;
 }
 
-.modal .flex {
+.flex {
+  height: 3px;
+  margin-top: 18px;
+  width: 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   align-self: flex-start;
   margin-left: 0px;
   font-family: "roboto";
+}
+
+.flex {
 }
 
 .modal input {
@@ -79,13 +141,29 @@ div:not(.gameboard) {
 
 .modal p {
   font-size: 0.9rem;
+  text-align: center;
   color: #777;
   margin: 0.4rem 0 0.2rem;
   font-family: "roboto";
+  font-weight: 400;
+}
+
+input[type="text"] {
+  margin-top: 15px;
+}
+
+input[type="radio"]:nth-child(1) + label {
+  margin-right: 20px;
+  margin-top: 15px;
+}
+
+input[type="radio"]:nth-child(1) {
+  margin-top: 15px;
 }
 
 .modal h3 {
-  font-family: "rancho";
+  font-family: "roboto";
+  font-weight: 700;
   font-size: 24px;
 }
 
@@ -118,6 +196,11 @@ button {
   border-radius: 50%;
 }
 
+.btn-close:hover {
+  background-color: #000;
+  color: #fff;
+}
+
 .btn-submit {
   margin: 4px;
   margin-top: 6.5px;
@@ -145,6 +228,11 @@ button {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+}
+
+.btn-submit:hover {
+  background-color: #000;
+  color: #fff;
 }
 
 .overlay {

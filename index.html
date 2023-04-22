@@ -5,6 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rancho&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <script src="app.js" defer></script>
     <title>Tic-Tac-Toe 🧑‍💻</title>
   </head>
@@ -23,7 +31,12 @@
         <div class="cell cell-9" data-index="8"></div>
       </div>
     </div>
-    <div class="btn-wrapper"><button class="startGame">New Game</button></div>
+    <div class="winner"></div>
+    <div class="text-name">Player One:</div>
+    <div class="text-side">Side:</div>
+    <div class="btn-wrapper"><button class="start-game">New Game</button></div>
+
+    <!-- Modal and Overlay -->
     <section class="modal hidden">
       <div class="flex">
         <button class="btn-close">⨉</button>
@@ -38,7 +51,7 @@
           <label for="name"></label>
         </p>
         <p>
-          <input type="radio" id="x-side" name="side" value="X" />
+          <input type="radio" id="x-side" name="side" value="X" required />
           <label for="radio">X</label>
           <input type="radio" id="o-side" name="side" value="O" />
           <label for="radio">O</label>

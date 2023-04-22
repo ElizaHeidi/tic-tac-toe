@@ -52,10 +52,12 @@ const newGame = (() => {
   const modal = document.querySelector(".modal");
   const overlay = document.querySelector(".overlay");
   const closeModalBtn = document.querySelector(".btn-close");
-  const startBtn = document.querySelector(".startGame");
+  const startBtn = document.querySelector(".start-game");
   const modalSubmit = document.querySelector(".btn-submit");
   let radio = document.querySelectorAll("input[type=radio]");
   let input = document.querySelector("input[type=text]");
+  let textName = document.querySelector(".text-name");
+  let textSide = document.querySelector(".text-side");
   let cells = document.querySelectorAll(".cell");
 
   const openModal = () => {
@@ -88,7 +90,25 @@ const newGame = (() => {
 
     closeModal();
     Gameboard.boardReset();
+    textName.textContent = "Name:";
+    textSide.textContent = "Side:";
+    printName();
+    printSide();
   });
+
+  const printName = (inputName) => {
+    inputName = input.value;
+    console.log(inputName);
+    textName.textContent += ` ${inputName}`;
+  };
+
+  const printSide = (side) => {
+    let xSide = document.querySelector("#x-side");
+    let oSide = document.querySelector("#o-side");
+    inputSide = xSide.checked ? xSide.value : oSide.value;
+    textSide.textContent += ` ${inputSide}`;
+    console.log(inputSide);
+  };
 
   cells.forEach((cell) => {
     cell.addEventListener("click", (e) => {
@@ -106,6 +126,9 @@ const newGame = (() => {
       const winner = checkWinner(playedPlayer);
       if (winner) {
         console.log(`${winner.name} (${winner.side}) is the winner!`);
+        document.querySelector(
+          ".winner"
+        ).textContent = `${winner.name} (${winner.side}) is the winner!`;
       } else {
         switchPlayers();
       }
